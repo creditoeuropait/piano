@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CreditoEuropa</title>
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Bibliothèques PDF (doivent être chargées avant script.js) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.8.2/jspdf.plugin.autotable.min.js"></script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="container">
+
+    <header class="site-header">
+      <div class="brand">
+        <!-- Placez votre fichier logo.png à côté de index.html -->
+        <img id="site-logo" src="logo.png" alt="CreditoEuropa"
+             onerror="this.style.display='none';document.getElementById('brand-text').hidden=false;">
+        <span id="brand-text" class="brand-text" hidden>Credito<span>Europa</span></span>
+      </div>
+
+      <div class="lang-switch">
+        <label for="lang-select" data-i18n="langLabel">Lingua</label>
+        <select id="lang-select" aria-label="Language">
+          <option value="it">Italiano</option>
+          <option value="de">Deutsch</option>
+          <option value="pt">Português</option>
+          <option value="ro">Română</option>
+          <option value="en">English</option>
+          <option value="pl">Polski</option>
+          <option value="es">Español</option>
+        </select>
+      </div>
+    </header>
+
+    <h1 data-i18n="heading">Simulatore di Prestito</h1>
+    <p class="subtitle" data-i18n="subtitle">Calcola il tuo piano di rimborso</p>
+
+    <form id="loan-form" novalidate>
+      <label for="amount" data-i18n="labelAmount">Importo del prestito (€)</label>
+      <input type="number" id="amount" min="1" step="0.01" value="10000" required>
+
+      <label for="duration" data-i18n="labelDuration">Durata (mesi)</label>
+      <input type="number" id="duration" min="1" max="600" step="1" value="60" required>
+
+      <label for="interest" data-i18n="labelInterest">Tasso d'interesse annuo (%)</label>
+      <input type="number" id="interest" min="0" max="100" step="0.01" value="5" required>
+
+      <button type="submit" id="calculate-btn" data-i18n="btnCalculate">Calcola il piano</button>
+    </form>
+
+    <section id="results" style="display:none;">
+      <h2 data-i18n="resultsTitle">Riepilogo</h2>
+      <div id="summary" class="summary"></div>
+
+      <button type="button" id="download-pdf" data-i18n="btnPdf">Scarica il PDF</button>
+
+      <h2 data-i18n="scheduleTitle">Piano di rimborso</h2>
+      <div class="table-container">
+        <table id="schedule">
+          <thead>
+            <tr>
+              <th data-i18n="thNumero">#</th>
+              <th data-i18n="thData">Data di Pagamento</th>
+              <th data-i18n="thRata">Rata (€)</th>
+              <th data-i18n="thInteressi">Interessi (€)</th>
+              <th data-i18n="thCapitale">Capitale (€)</th>
+              <th data-i18n="thSaldo">Saldo Residuo (€)</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <p class="disclaimer" data-i18n="disclaimer">Simulazione indicativa, non costituisce un'offerta contrattuale.</p>
+  </div>
+</body>
+</html>
